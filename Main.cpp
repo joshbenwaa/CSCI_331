@@ -14,7 +14,7 @@ int main()
 {
 	int temp, last_output, data;
 	int initialize = 0;
-	Heap buf;
+	Heap buf; 
 	bool flag=true;
 	bool success;
 	bool switching = false;

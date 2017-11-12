@@ -19,11 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Kway.cpp" />
     <ClCompile Include="..\Main.cpp" />
     <ClCompile Include="..\ReplacementSelectionImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Kway.h" />
     <ClInclude Include="..\ReplacementSelection.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\data4.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

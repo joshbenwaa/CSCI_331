@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string.h> // provides strncmp()
 #include "ReplacementSelection.h"
+#include "Kway.h"
 using namespace std;
 using namespace csci331_project1;
 
@@ -13,13 +14,14 @@ int main()
 {
 	int temp, last_output, data;
 	int initialize = 0;
-	Heap buf; 
+	Heap buf;
+	Kway KwaySort;
 	bool flag=true;
 	bool success;
 	bool switching = false;
 	string	input_file_name, data_output_file_name, pointer_output_file_name;
-	ifstream in_file;
-	ofstream out_file, pointer_out_file;
+	ifstream in_file, Josh_Input;
+	ofstream out_file, pointer_out_file, Josh_output;
 	cout << "Please enter the name of the file you wish to sort:";
 	getline(cin, input_file_name);
 	cout << "Please enter the name of the file you wish to store the sorted runs in:";
@@ -102,6 +104,24 @@ int main()
 	}
 	out_file.close();
 	pointer_out_file.close();
+
+	cout << "Please enter the name of the file you wish to Merge:";
+	getline(cin, input_file_name);
+	Josh_Input.open(input_file_name.c_str());
+	if (Josh_Input.fail())
+	{
+		return 0;
+	}
+	KwaySort.Get_Inputs(Josh_Input);
+
+	cout << "Please enter the name of the file you wish to place the Merge into:";
+	getline(cin, data_output_file_name);
+	Josh_output.open(data_output_file_name.c_str());
+	if (Josh_output.fail())
+	{
+		return 0;
+	}
+	KwaySort.sort_and_create(Josh_output);
 	return 0;
 
 }

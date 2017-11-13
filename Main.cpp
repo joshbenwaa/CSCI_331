@@ -23,7 +23,7 @@ int main()
 	ifstream in_file, Josh_Input;
 	ofstream out_file, pointer_out_file, Josh_output;
 	cout << "Please enter the name of the file you wish to sort:";
-	getline(cin, input_file_name);
+	getline(cin, input_file_name);     
 	cout << "Please enter the name of the file you wish to store the sorted runs in:";
 	getline(cin, data_output_file_name);
 	cout << "Please enter the name of the file you wish to store the pointers to the sorted runs in:";

@@ -10,10 +10,12 @@ using namespace std;
 
 namespace csci331_project1
 {
-	bool Heap::insert(int entry, bool left_or_right)
+	template<class H>
+	bool Heap<H>::insert(H entry, bool left_or_right)
 	{
 		bool success = true; //tracks if entry is successfully insterted
-		int temp_size, temp, current_size, offset, sign;
+		string temp;
+		int temp_size, current_size, offset, sign;
 		bool flag = true; // tracks if entry is in correct position within the heap
 		if (size_left + size_right >= MAX) // check if buffer is full
 			success = false;
@@ -55,9 +57,11 @@ namespace csci331_project1
 		return success;
 	}
 
-	int Heap::remove_root(bool left_or_right)
+	template<class H>
+	H Heap<H>::remove_root(bool left_or_right)
 	{
-		int temp, lower, sign, offset, current_size;
+		string temp, lower;
+		int sign, offset, current_size;
 		int temp_size = 0; // tracks location of largest element as it is percolated down
 		bool flag = true;
 		if (((left_or_right==false)&&(size_right<1)) || ((left_or_right==true)&&(size_left<1))) // check if desired heap is empty
@@ -72,7 +76,7 @@ namespace csci331_project1
 				current_size = size_left;
 
 			}
-			else 
+			else
 			{
 				offset = MAX - 1;
 				sign = -1;
@@ -131,7 +135,8 @@ namespace csci331_project1
 		return temp;
 	}
 
-	int Heap::size(bool left_or_right)
+	template<class H>
+	int Heap<H>::size(bool left_or_right)
 	{
 		if (left_or_right)
 			return size_left;
@@ -139,4 +144,3 @@ namespace csci331_project1
 			return size_right;
 	}
 }
-

@@ -10,6 +10,7 @@
 
 namespace csci331_project1
 {
+		template<class H>
 		class Heap
 		{
 			public:
@@ -19,15 +20,15 @@ namespace csci331_project1
 				Heap() { size_left = 0; size_right = 0; } // Inline
 
 				//modification member functions
-				bool insert(int entry, bool left_or_right);
-				int remove_root(bool left_or_right);
+				bool insert(H entry, bool left_or_right);
+				H remove_root(bool left_or_right);
 				int size(bool left_or_right);
 
 			private:
-				int buffer[MAX];
+				H buffer[MAX];
 				int size_left;
 				int size_right;
 		};
-		
+
 }
 #endif

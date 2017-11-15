@@ -14,7 +14,8 @@ namespace csci331_project1
 
       Exec(){InputFile = 'x'; RunFile = 'y'; PointerFile = 'z';}
 
-      void run();
+      void run_Replacement();
+	  void run_Kway();
       void setFileNames();
       //void getFiles();
 
@@ -22,6 +23,7 @@ namespace csci331_project1
       std::string InputFile;
       std::string RunFile;
       std::string PointerFile;
+	  std::string OutputFile;
 
   };
 }

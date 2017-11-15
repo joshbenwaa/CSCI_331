@@ -12,6 +12,7 @@ int main()
 {
   Exec P1;
   P1.setFileNames();
-  P1.run();
+  P1.run_Replacement();
+  P1.run_Kway();
   return 0;
 }

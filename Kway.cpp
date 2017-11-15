@@ -41,8 +41,8 @@ bool Kway::Get_Inputs(ifstream& Input)
 						tempSingleData.S_Value = tempValue.substr(3, 3);
 
 				}
-				tempSingleData.Value = std::stoi(tempValue, nullptr, 10);
 				tempSingleData.RunNumber = RunNum;
+				tempSingleData.Type = Key_type;
 				//tempSingleData.ArrayPosition = tempArrayPosition;
 				//tempArrayPosition++;
 				tempData.push_back(tempSingleData);

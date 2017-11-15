@@ -45,13 +45,11 @@ public:
 		}
 	};
 
-	vector <int> heap;
 	int * input; //Dynamic Array for inputs
 	int * offsets;
 	bool Get_Inputs(ifstream& Input);
 	bool sort_and_create(ofstream& Output);
 	vector<vector<Data>> ValuesArray;
-	vector<int> ByteOffsets;
 	Data Value;
 };
 

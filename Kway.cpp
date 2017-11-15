@@ -26,6 +26,21 @@ bool Kway::Get_Inputs(ifstream& Input)
 			if (Values[i] == ' ')
 			{
 				tempValue = Values.substr(OldSpace, i - OldSpace);
+
+				//What to do with the data
+				switch (this->Key_type)
+				{
+					case 0 : //Integers
+						tempSingleData.Int_Value = std::stoi(tempValue, nullptr, 10);
+						tempSingleData.S_Value = ""; break;
+					case 1 : //Strings
+						tempSingleData.Int_Value = NULL;
+						tempSingleData.S_Value = tempValue; break;
+					case 2 : //Mixed Pairs
+						tempSingleData.Int_Value = std::stoi(tempValue.substr(0,3), nullptr, 10);
+						tempSingleData.S_Value = tempValue.substr(3, 3);
+
+				}
 				tempSingleData.Value = std::stoi(tempValue, nullptr, 10);
 				tempSingleData.RunNumber = RunNum;
 				//tempSingleData.ArrayPosition = tempArrayPosition;
@@ -69,7 +84,7 @@ bool Kway::sort_and_create(ofstream& Output)
 		std::make_heap(heap.begin(),heap.end(), Kway::greater1());
 		Min = heap.front();
 		//Result.push_back(Min);
-		Output << Min.Value << " ";
+		Output << Min.Int_Value << Min.S_Value << " ";
 		std::pop_heap(heap.begin(), heap.end(), Kway::greater1());
 		heap.pop_back();
 		if ((ValuesArray[Min.RunNumber].size() > 1))
@@ -82,9 +97,4 @@ bool Kway::sort_and_create(ofstream& Output)
 	}
 
 	return false;
-}
-
-bool Kway::Compare(Data d1, Data d2)
-{
-	return d1.Value > d2.Value;
 }

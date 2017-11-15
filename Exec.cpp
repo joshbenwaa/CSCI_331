@@ -4,7 +4,7 @@
 #include <sstream>
 #include <string.h> // provides strncmp()
 #include "Exec.h"
-#include "ReplacementSelectionImplementation.cpp"
+#include "Heap.h"
 using namespace std;
 
 namespace csci331_project1

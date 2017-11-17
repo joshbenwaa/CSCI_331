@@ -18,18 +18,24 @@
     <ClCompile Include="..\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\ReplacementSelectionImplementation.cpp">
+    <ClCompile Include="..\Kway.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Kway.cpp">
+    <ClCompile Include="..\Heap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Replace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ReplacementSelection.h">
+    <ClInclude Include="..\Kway.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Kway.h">
+    <ClInclude Include="..\Heap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Replace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

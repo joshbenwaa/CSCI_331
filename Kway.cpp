@@ -105,3 +105,15 @@ bool Kway::Compare(Data d1, Data d2)
 {
 	return d1.Value > d2.Value;
 }
+
+long stoi(const char *s)
+{
+	long i;
+	i = 0;
+	while (*s >= '0' && *s <= '9')
+	{
+		i = i * 10 + (*s - '0');
+		s++;
+	}
+	return i;
+}

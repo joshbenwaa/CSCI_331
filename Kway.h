@@ -9,27 +9,44 @@ using namespace std;
 class Kway
 {
 public:
+	int Key_type;
 	struct Data
 	{
-		int Value;
+		int Type;
+		int Int_Value;
+		string S_Value;
 		int RunNumber;
 		//int ArrayPosition;
 	};
 
 	struct greater1 {
 		bool operator()(const Data& a, const Data& b) const {
-			return a.Value > b.Value;
+						switch (a.Type)
+						{
+						case 0: //integer
+							return a.Int_Value > b.Int_Value;
+						case 1: //String
+							if (a.S_Value.compare(b.S_Value) > 0)
+								return true;
+							else
+								return false;
+						case 2: //Fixed Order Pairs sorted by Integers
+							return a.Int_Value > b.Int_Value;
+						case 3: //Fixed Order Pairs sorted by Strings
+							if (a.S_Value.compare(b.S_Value) > 0)
+								return true;
+							else
+								return false;
+						}
 		}
 	};
 
-	vector <int> heap;
 	int * input; //Dynamic Array for inputs
 	int * offsets;
 	bool Get_Inputs();
 	bool sort_and_create();
-	bool Compare(Data d1, Data d2);
-	vector< vector<Data> > ValuesArray;
-	vector<int> ByteOffsets;
+	long stoi(const char *s);
+	vector<vector<Data> > ValuesArray;
 	Data Value;
 };
 

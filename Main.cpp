@@ -3,8 +3,8 @@
 #include <fstream> // input from file
 #include <sstream>
 #include <string.h> // provides strncmp()
-#include "Replace.cpp"
-#include "Kway.cpp"
+#include "Replace.h"
+#include "Kway.h" //Change this to .cpp for UNIX
 
 using namespace std;
 using namespace csci331_project1;

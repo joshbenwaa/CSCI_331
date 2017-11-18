@@ -25,8 +25,6 @@ namespace csci331_project1
       void run();
       void setFileNames();
       //void getFiles();
-
-    private:
       std::string InputFile;
       std::string RunFile;
       std::string PointerFile;

@@ -5,7 +5,26 @@
 #include <algorithm>
 #include <sstream>
 #include <string>
-bool Kway::Get_Inputs()
+
+Kway::Kway(int k)
+{
+	if (k > 2)
+	{
+		if (k == 4)
+		{
+			Key_type = 2;
+		}
+		else //k = 3 or 5
+		{
+			Key_type = 3;
+		}
+	}
+	else
+	{
+		Key_type = k;
+	}
+}
+bool Kway::Get_Inputs(string Input)
 {
 	ifstream Josh_Input;
 	string input_file_name;
@@ -18,23 +37,24 @@ bool Kway::Get_Inputs()
 	Data tempSingleData;
 	int tempArrayPosition = 0;
 	uint8_t OldSpace = 0;
+	int k = 0;
 	//Start with Data file
 	int RunNum = 0;
-	cout << "Please enter the name of the file you wish to Merge: ";
-	cin >> input_file_name;
-	cout << "Please enter what type of keys: ";
-	cout << "0 = Integers\n1 = Strings\n2 = Pairs:   ";
-	cin >> TempType;
-	if (TempType == 2)
-	{
-		cout << "Which value in the Pair do you wish to sort by?";
-		cout << "0 = Integers\n 1 = Strings:   ";
-		cin >> Pairs;
-		TempType += Pairs;
-		;
-	}
-	Key_type = TempType;
-	Josh_Input.open(input_file_name.c_str());
+	//cout << "Please enter the name of the file you wish to Merge: ";
+	//cin >> input_file_name;
+	//cout << "Please enter what type of keys: ";
+	//cout << "0 = Integers\n1 = Strings\n2 = Pairs:   ";
+	//cin >> TempType;
+	//if (TempType == 2)
+	//{
+	//	cout << "Which value in the Pair do you wish to sort by?";
+	//	cout << "0 = Integers\n 1 = Strings:   ";
+	//	cin >> Pairs;
+	//	TempType += Pairs;
+	//	;
+	//}
+	//Key_type = TempType;
+	Josh_Input.open(Input.c_str());
 	if (Josh_Input.fail())
 	{
 		return 0;
@@ -62,19 +82,37 @@ bool Kway::Get_Inputs()
 							switch (this->Key_type)
 							{
 							case 0: //Integers
-
 								tempSingleData.Int_Value = stoi(tempValue.c_str());
 								tempSingleData.S_Value = ""; break;
 							case 1: //Strings
 								tempSingleData.Int_Value = 0;
 								tempSingleData.S_Value = tempValue; break;
 							case 2: case 3: //Mixed Pairs
-								tempSingleData.Int_Value = stoi(tempValue.substr(0, 3).c_str());
-								tempSingleData.S_Value = tempValue.substr(3, 3);break;
+								if (tempValue[0] < 58) //Begins with Integers
+								{
+									k = 0;
+									while (tempValue[k] < 58)
+									{
+										k++; //Try to find the middle point between Integers and Strings
+									}
+									//K is now the last Integer Value
+									tempSingleData.Int_Value = stoi(tempValue.substr(0, k).c_str());
+									tempSingleData.S_Value = tempValue.substr(k, tempValue.length() - k); break;
+								}
+								else //Begins with String
+								{
+									k = 0;
+									while (tempValue[k] > 58)
+									{
+										k++; //Try to find the middle point between Integers and Strings
+									}
+									tempSingleData.S_Value = tempValue.substr(0, k); 
+									tempSingleData.Int_Value = stoi(tempValue.substr(k, tempValue.length() - k).c_str()); break;
+								}
 
 							}
 							tempSingleData.RunNumber = RunNum;
-							tempSingleData.Type = TempType;
+							tempSingleData.Type = Key_type;
 							tempData.push_back(tempSingleData);
 							OldSpace = i + 1;
 						}

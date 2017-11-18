@@ -9,6 +9,7 @@ using namespace std;
 class Kway
 {
 public:
+	Kway(int k);
 	int Key_type;
 	struct Data
 	{
@@ -43,7 +44,7 @@ public:
 
 	int * input; //Dynamic Array for inputs
 	int * offsets;
-	bool Get_Inputs();
+	bool Get_Inputs(string Input);
 	bool sort_and_create();
 	long stoi(const char *s);
 	vector<vector<Data> > ValuesArray;

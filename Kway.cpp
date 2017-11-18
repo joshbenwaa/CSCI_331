@@ -70,8 +70,6 @@ bool Kway::Get_Inputs()
 				}
 				tempSingleData.RunNumber = RunNum;
 				tempSingleData.Type = TempType;
-				//tempSingleData.ArrayPosition = tempArrayPosition;
-				//tempArrayPosition++;
 				tempData.push_back(tempSingleData);
 				OldSpace = i + 1;
 			}
@@ -118,7 +116,6 @@ bool Kway::sort_and_create()
 		//Heapify;
 		std::make_heap(heap.begin(),heap.end(), Kway::greater1());
 		Min = heap.front();
-		//Result.push_back(Min);
 		switch (Min.Type)
 		{
 			case 0: //Integers

@@ -47,44 +47,56 @@ bool Kway::Get_Inputs()
 		{
 			Values.erase(Values.end() - 10, Values.end());
 		}
-
-		for (int i = 0; i < Values.length(); i++)
+		if (Values.length() > 1)
 		{
-			if (Values[i] == ' ')
+			for (int i = 0; i < Values.length(); i++)
 			{
-				tempValue = Values.substr(OldSpace, i - OldSpace);
-				//What to do with the data
-				switch (this->Key_type)
+				if (Values[i] == ' ')
 				{
-				case 0: //Integers
+					if (i != Values.length())
+					{
+						if (Values[i + 1] != ' ')
+						{
+							tempValue = Values.substr(OldSpace, i - OldSpace);
+							//What to do with the data
+							switch (this->Key_type)
+							{
+							case 0: //Integers
 
-					tempSingleData.Int_Value = stoi(tempValue.c_str());
-					tempSingleData.S_Value = ""; break;
-				case 1: //Strings
-					tempSingleData.Int_Value = 0;
-					tempSingleData.S_Value = tempValue; break;
-				case 2: case 3: //Mixed Pairs
-					tempSingleData.Int_Value = stoi(tempValue.substr(0, 3).c_str());
-					tempSingleData.S_Value = tempValue.substr(3, 3);break;
+								tempSingleData.Int_Value = stoi(tempValue.c_str());
+								tempSingleData.S_Value = ""; break;
+							case 1: //Strings
+								tempSingleData.Int_Value = 0;
+								tempSingleData.S_Value = tempValue; break;
+							case 2: case 3: //Mixed Pairs
+								tempSingleData.Int_Value = stoi(tempValue.substr(0, 3).c_str());
+								tempSingleData.S_Value = tempValue.substr(3, 3);break;
+
+							}
+							tempSingleData.RunNumber = RunNum;
+							tempSingleData.Type = TempType;
+							tempData.push_back(tempSingleData);
+							OldSpace = i + 1;
+						}
+
+					}
 
 				}
-				tempSingleData.RunNumber = RunNum;
-				tempSingleData.Type = TempType;
-				tempData.push_back(tempSingleData);
-				OldSpace = i + 1;
+				tempSingleData.RunNumber = 0;
+				tempSingleData.Int_Value = 0;
+				tempSingleData.S_Value = "";
 			}
+			Values = "";
 			tempSingleData.RunNumber = 0;
 			tempSingleData.Int_Value = 0;
 			tempSingleData.S_Value = "";
+			OldSpace = 0;
+			RunNum++;
+			ValuesArray.push_back(tempData);
+			tempData.clear();
 		}
-		Values = "";
-		tempSingleData.RunNumber = 0;
-		tempSingleData.Int_Value = 0;
-		tempSingleData.S_Value = "";
-		OldSpace = 0;
-		RunNum++;
-		ValuesArray.push_back(tempData);
-		tempData.clear();
+
+
 	}
 	return true;
 }

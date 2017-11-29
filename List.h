@@ -1,107 +1,82 @@
 // Anthony Bloch
-// CSCI 301: Section 1
-// Project 2: Ordered List Class
-// Due datae: 1.31.2017
-// This is the header file for the ordered list class
-// File name: List_header.h
+// CSCI 301 Section 1
+// Project 5
+// Due date: 3-2-2017
+// This is the header file for a Ulist (unordered list) class represented by 
+// a list of nodes linked by pointers. Each node contains a character (ch) and
+// pointers to the next and previous nodes (next and prev).
+// The class itself only contains the pointers pointing to the first and last nodes (first and last).
+// file name: Ulist_header.h
+//
+// Constructor for Ulist class
+// 	Ulist()
+//		Postcondition: The Ulist has been initialized as 
+//		an empty List with first and last both NULL
+// Destructor for Ulist class
+// 	~Ulist()
+// 		Postcondition: all memory allocated by the Ulist
+// 		has been given back
+// Modification member functions for the Ulist class
+//	append(Item& entry)
+//		Postcondition: entry has been added on as a new node on the end of the Ulist
+//	remove_last()
+//		Postcondition: the last node has been removed and last now points to the second to last node
+//		whose next pointer is NULL. If the Ulist is empty or only contains one item, the Ulist is now
+//		empty, and first and last are both NULL.
+//
+// Constant member functions for the Ulist class
+//	empty()
+//		Postcondition: 1 is returned if the Ulist is empty. Otherwise 0 is returned.
+//
+// friend function for the Ulist class
+// 		std::ostream& operator << (std::ostream& out_s, const Ulist& u);
+// 			Postcondition: The contents of the Ulist u
+// 			have been written to the output stream out_s
 
-// CLASS PROVIDED: List; a container class for ordered multisets
-// of items.
-//
-// TYPEDEF and MEMBER CONSTANTS for the List class:
-//   static const size_t CAPACITY = 30;
-//     List::CAPACITY is the maximum number of items that a List
-//     can hold.
-//
-//   typedef int Item;
-//     List::Item is the data type of the items in a List. It may
-//     be any of the C++ built-in types (int, char, etc.) or a
-//     class with a default constructor, an assignment operator,
-//     and operators to test for equality (==) and inequality (!
-//     =).
-//
-// CONSTRUCTOR for the List class:
-//   List( )
-//     Postcondition: The List has been initialized as an empty
-//     List.
-//
-// MODIFICATION MEMBER FUNCTIONS for the List class:
-//   void make_empty ( )
-//     Postcondition: The List has been re-initialized to be
-//     empty.
-//
-//   void insert ( const Item& entry )
-//     Precondition: size() < CAPACITY
-//     Postcondition: A new copy of entry has been added to the
-//     List.
-//
-//   void remove ( const Item& target )
-//     Postcondition: If the List contained target, then one copy
-//     of target has been removed from the List; otherwise, the
-//     List is unchanged.
-//
-// CONSTANT MEMBER FUNCTIONS for the List class:
-//   size_t size( ) const
-//     Postcondition: The return value is the number of items in
-//     the List.
-//
-//   size_t occurrences ( const Item& target ) const
-//     Postcondition: The return value is the number of times
-//     target is in the List.
-//
-// FRIEND FUNCTION for the Bag class:
-//   friend ostream& operator << ( ostream& out_s, const Bag& b )
-//     Postcondition: The contents of the Bag b have been written
-//     to the output stream out_s.
-//
-//   friend List operator + ( const List& l1, const List& l2);
-//     Precondition: l1.size() + l2.size() <= CAPACITY.
-//     Postcondition: The List returned is the union of l1 and
-//     l2.
-//
-// VALUE SEMANTICS for the List class:
-//   Assignment and the copy constructor may be used with List
-//   objects.
+#ifndef ULIST_H
+#define ULIST_H
 
-#ifndef LIST_H
-#define LIST_H
-#include <cstdlib>  // provides size_t
-#include <iostream> // provides istream and ostream
+#include <cstdlib>
+#include <iostream>  // istream and ostream
+#include <string.h> // string functions
+#include <fstream> //read from file
 
-namespace csci301_list
+namespace csci301_ulist
 {
-	class List
+	class Ulist
 	{
 	public:
+		typedef int Item;
 
-		//TYPEDEF and MEMBER CONSTANT
-		static const size_t CAPACITY = 30;	// maximum size of any List
-		typedef int Item; 				//What can go in a List
-										//CONSTRUCTOR
-		List() { used = 0; }				// Inline
+		// constructor
+		Ulist() { first = NULL; last = NULL; } // inline
 
-											//MODIFICATION MEMBER FUNCTIONS
-		void make_empty() { used = 0; } 	// Inline
-											////NO SEMICOLON ON THE LINE ABOVE???
-		void insert(const Item& entry);
-		void remove(const Item& target);
-		void operator += (const List& addend);
+											   // destructor
+		~Ulist();
 
-		// CONSTANT MEMBER FUNCTIONS
-		size_t size() const { return used; } //Inline
-		size_t search(const Item& target) const;
-		size_t element_value(const size_t& element) const;
+		// modification member functions
+		void append(const Item& entry);
+		void remove_last();
 
-		//FRIEND FUNCTIONS
-		friend std::ostream& operator << (std::ostream& out_s, const List& l);
-		friend List operator + (const List& l1, const List& l2);
+		// constant member functions
+		int empty() const { if (first == NULL&&last == NULL)return 1; else return 0; }; //inline
+
+																						// friend function
+		friend std::ostream& operator << (std::ostream& out_s, const Ulist& u);
 
 	private:
+		// data members
+		struct Node
+		{
+			Item ch; //an array of Words
+			Node *next;
+			Node *prev;
+		};
+		Node *first;
+		Node *last;
 
-		Item data[CAPACITY]; 		//An array of Items
-		size_t used; 			//How many hold List elements
+		// private function
+		Node* get_node(const Item& entry, Node* link_prev, Node* link_next);
 	};
 }
-
 #endif
-#pragma once

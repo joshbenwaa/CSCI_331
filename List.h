@@ -1,82 +1,95 @@
-// Anthony Bloch
-// CSCI 301 Section 1
-// Project 5
-// Due date: 3-2-2017
-// This is the header file for a Ulist (unordered list) class represented by 
-// a list of nodes linked by pointers. Each node contains a character (ch) and
-// pointers to the next and previous nodes (next and prev).
-// The class itself only contains the pointers pointing to the first and last nodes (first and last).
-// file name: Ulist_header.h
-//
-// Constructor for Ulist class
-// 	Ulist()
-//		Postcondition: The Ulist has been initialized as 
-//		an empty List with first and last both NULL
-// Destructor for Ulist class
-// 	~Ulist()
-// 		Postcondition: all memory allocated by the Ulist
-// 		has been given back
-// Modification member functions for the Ulist class
-//	append(Item& entry)
-//		Postcondition: entry has been added on as a new node on the end of the Ulist
-//	remove_last()
-//		Postcondition: the last node has been removed and last now points to the second to last node
-//		whose next pointer is NULL. If the Ulist is empty or only contains one item, the Ulist is now
-//		empty, and first and last are both NULL.
-//
-// Constant member functions for the Ulist class
-//	empty()
-//		Postcondition: 1 is returned if the Ulist is empty. Otherwise 0 is returned.
-//
-// friend function for the Ulist class
-// 		std::ostream& operator << (std::ostream& out_s, const Ulist& u);
-// 			Postcondition: The contents of the Ulist u
-// 			have been written to the output stream out_s
-
-#ifndef ULIST_H
-#define ULIST_H
-
+#ifndef LIST_H
+#define LIST_H
 #include <cstdlib>
-#include <iostream>  // istream and ostream
-#include <string.h> // string functions
-#include <fstream> //read from file
+#include <iostream>
+#include <string>
+using namespace std;
 
-namespace csci301_ulist
+namespace csci331
 {
-	class Ulist
+	class List
 	{
 	public:
-		typedef int Item;
-
-		// constructor
-		Ulist() { first = NULL; last = NULL; } // inline
-
-											   // destructor
-		~Ulist();
-
-		// modification member functions
-		void append(const Item& entry);
-		void remove_last();
-
-		// constant member functions
-		int empty() const { if (first == NULL&&last == NULL)return 1; else return 0; }; //inline
-
-																						// friend function
-		friend std::ostream& operator << (std::ostream& out_s, const Ulist& u);
-
-	private:
-		// data members
-		struct Node
+		struct Key
 		{
-			Item ch; //an array of Words
-			Node *next;
-			Node *prev;
+			int value_i;
+			string value_s;
+			Key* prev_sibling;
+			Key* next_sibling;
 		};
-		Node *first;
-		Node *last;
 
-		// private function
-		Node* get_node(const Item& entry, Node* link_prev, Node* link_next);
+		Key* first;
+		Key* last;
+
+		List() { first = NULL; last = NULL; }
+
+		Key* get_key(int entry_i, string entry_s, Key* prev_link, Key* next_link)
+		{
+			Key *temp;
+			temp = new Key;
+			temp->value_i = entry_i;
+			temp->value_s = entry_s;
+			temp->prev_sibling = prev_link;
+			temp->next_sibling = next_link;
+			return temp;
+		}
+
+		void insert(int entry_i, string entry_s)
+		{
+			Key* prev;
+			if (first == NULL&&last == NULL)
+			{
+				first = get_key(entry_i, entry_s, NULL, NULL);
+				last = first;
+			}
+			else if (entry_i < first->value_i)
+			{
+				first->prev_sibling = get_key(entry_i, entry_s, NULL, first);
+				first = first->prev_sibling;
+			}
+			else if (entry_i > last->value_i)
+			{
+				last->next_sibling = get_key(entry_i, entry_s, last, NULL);
+				last = last->next_sibling;
+			}
+			else
+			{
+				prev = first;
+				while (entry_i > prev->value_i)
+					prev = prev->next_sibling;
+				prev->prev_sibling->next_sibling = get_key(entry_i, entry_s, prev->prev_sibling, prev->prev_sibling->next_sibling);
+				prev->prev_sibling = prev->prev_sibling->next_sibling;
+			}
+		}
+
+		int length() const
+		{
+			Key *cursor;
+			int length = 0;
+			for (cursor = first; cursor != NULL; cursor = cursor->next_sibling)
+				++length;
+			return length;
+		}
+
+		void print(ostream& out_s)
+		{
+			Key *cursor;
+			cursor = first;
+			while (cursor != NULL)
+			{
+				out_s << cursor->value_i << ' ' << cursor->value_s << ' ';
+				cursor = cursor->next_sibling;
+			}
+			cout << endl;
+			cursor = last;
+			while (cursor != NULL)
+			{
+				out_s << cursor->value_i << ' ' << cursor->value_s << ' ';
+				cursor = cursor->prev_sibling;
+			}
+		}
+
+
 	};
 }
 #endif

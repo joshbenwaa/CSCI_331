@@ -8,8 +8,11 @@ using namespace csci331;
 int main()
 {
 	int entry_i;
-	std::string entry_s;
-	List l;
+	string entry_s;
+	int int_or_string;
+	cout << "Would you like to sort by integers (enter number > 0) or by strings (enter number <1)?";
+	cin >> int_or_string;
+	List l(int_or_string);
 	char ch = 'y';
 	while (ch == 'y' || ch == 'Y')
 	{

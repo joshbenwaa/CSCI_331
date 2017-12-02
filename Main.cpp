@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "List.h"
+#include "List_header.h"
 using namespace std;
 using namespace csci331;
 
@@ -39,6 +39,8 @@ int main()
 			cout << "The length of the list is " << l.length() << endl;
 		else if (ch == 'p') // print
 			l.print(cout);
+		else if (ch == 'o') // ordered print
+			l.print_sequence(cout);
 		else if (ch == 's') //search
 		{
 			cout << "Please enter an integer to search:";

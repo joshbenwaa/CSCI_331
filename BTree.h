@@ -9,22 +9,27 @@ namespace csci331
   class BTree
   {
   public:
-    Key* ROOT;
-    static int MAX_SIZE;
+    Key* ROOT; //Pointer to the root node of the B+Tree, Eldest Parent
     int        T_Size;
-    int        int_or_string;
-    string     in_file, out_file;
+    int        int_or_string; //Integer for holding user choice for either integer or string manipulation
+    string     in_file, out_file; //input and output file (string) names
+   static int MAXBLOCKSIZE = 6; //Maximum number of records/keys that can be stored in a block
+
+   struct Block //structure for blocks, make up leaf nodes of tree, holds records in the form of a list
+   {
+       bool leaf; //true if block is a leaf node, false if not
+
+
+   };
 
     BTREE(int i_or_s, int Size, string InFile, string OutFile)
     {
-      int_or_string = i_or_s;
+      int_or_string = i_or_s; //Integer for holding user choice for either integer or string manipulation
       MAX_SIZE      = Size;
-      in_file       = InFile;
-      out_file      = OutFile;
+      in_file       = InFile; //File of input data
+      out_file      = OutFile; //Output file
       T_Size        = 1;
     }
-
-
 
 
     insert()
@@ -36,7 +41,6 @@ namespace csci331
     {
 
     }
-
 
     Print_All()
     {
@@ -52,7 +56,6 @@ namespace csci331
     {
 
     }
-
 
     Rebuild()
     {

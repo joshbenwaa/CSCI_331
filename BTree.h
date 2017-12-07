@@ -66,8 +66,8 @@ namespace csci331
     	{
         	Node* leftNode = new Node();    // create new node to left
         	middle = newNode->getSize()/2;       // find the middle of the node
-		int nPos = 0;                   // starting position of the node
-        	for(; nPos != middle; nPos++)        
+		
+        	for(int position = 0; position != middle; position++)        
         	{
             		leftNode->insert(newNode->getFront(), newNode->getFront()); // copy values from front of node
             		newNode->popFront();        // Pop off of current vector

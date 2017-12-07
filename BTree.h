@@ -52,9 +52,30 @@ namespace csci331
     }
 
 
-    insert()
+    insert(const int record)///jake
     {
-    l.insert(entry_i, entry_s, NULL, NULL); //same insert as the list main program
+    	int middle;       // middle value of the node 
+    	Node* newNode;      // pointer to new Node 
+    	Node* parentNode;   // pointer to parent
+	
+	
+    	newNode = ROOT;     // newNode points to root
+    	newNode -> insert(record, record);      // insert records into root
+
+    	if(newNode->isFull())  // check against node overfill
+    	{
+        	Node* leftNode = new Node();    // create new node to left
+        	middle = newNode->getSize()/2;       // find the middle of the node
+		int nPos = 0;                   // starting position of the node
+        	for(; nPos != middle; nPos++)        
+        	{
+            		leftNode->insert(newNode->getFront(), newNode->getFront()); // copy values from front of node
+            		newNode->popFront();        // Pop off of current vector
+       	 	}
+		Node* newParentNode = new Node();  // new parent node
+		parentNode = newParentNode;            // point new parent here
+        	parentNode->insert(newNode->getFront(),newNode->getFront());  //Copy to old parent node
+    	}
     }
 
     remove()

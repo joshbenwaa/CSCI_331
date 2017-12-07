@@ -1,3 +1,4 @@
+#include "Node.h" //jake
 #ifndef BTREE_H
 #define BTREE_H
 #include <cstdlib>

@@ -12,11 +12,12 @@ int main()
 	int int_or_string;
 	char ch;
 	bool flag = true;
-	cout << "Would you like to sort by integers (enter number > 0) or by strings (enter number <1)?";
+	cout << "Would you like to sort by integers (enter number > 0) \n or by strings (enter number <1)?";
 	cin >> int_or_string;
 	List l(int_or_string);
 	while (flag)
 	{
+        cout<< " i = insert \n r = remove \n p = print \n s = search \n o = ordered print \n b = bottom , t = top \n";
 		cout << "Please enter a command:";
 		cin >> ch;
 		if (ch == 'i') // insert

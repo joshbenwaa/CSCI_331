@@ -81,7 +81,20 @@ namespace csci331
 
     remove()
     {
-    l.remove(entry_i, entry_s); //same insert as the list main program
+    	int temp;
+
+    	while(!found)
+    	{	
+        	temp = BPTree.search(key);
+        	if(temp == NULL)
+            		return false;
+        	else
+            	for(int i = 0; i < Node.Records.size(); i++)
+            	{
+                	if(Node.Records[i] == key)
+                    	Node.Records.erase(Node.Records.begin()+i);
+            	}
+    	}
     }
 
     Print_All()

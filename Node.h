@@ -1,7 +1,7 @@
-//jake
+//Jake and Justin
 #ifndef _NODE
 #define _NODE
-
+#include "Node.cpp"
 #include <vector>
 using std::vector;
 
@@ -13,7 +13,7 @@ private:
 	  Node* leftNode;         // points to leaf node
 
 	  vector<int> Records;    // records pointed to by the leaf nodes
-
+      vector<int> Keys;           // key vector, possibly represents RRN
 	  Node* forward;          // points to next node
 	  Node* backward;         // points to previous node
 	  int order;              // Tree order
@@ -30,13 +30,13 @@ public:
 
     //determines if leaf is node
     bool isLeaf();
-    
+
     //pointer where node should split
     Node* Split(int key);
 
     // returns node size
     int getSize();
-    
+
     //returns the key of  the entry record
     int getEntry(int index);
 
@@ -54,7 +54,7 @@ public:
 
     // Deletes the first key
 	  void popFront();
-    
+
     // points to left sibling
     Node* getLeftSibling();
 

@@ -1,14 +1,14 @@
-//Jake
-
+//Jake and Justin
+#include <vector>
 #include "Node.h"
 
 
     // Default constructor
-Node::Node()
+Node()
 {
-    int order = 6;              // default size 
+    int order = 6;               // default size, order generally refers to the number of children a node can have
     bool leaf = false;          // Not a leaf
-    vector<int> Keys;           // key vector
+    std::vector<int> Keys;     // key vector
 }
 
 //inserts the keys and records  for the file
@@ -23,11 +23,11 @@ void Node::insert(int key, int record)
 	}
 	else
 	{
-		
-	}
-}
 
-  // This function checks if the b+tree is full and returns true or false accordingly  
+	}
+};
+
+  // This function checks if the b+tree is full and returns true or false accordingly
 bool Node::isFull()
 {
     if(Keys.size() + 1 >= order)    // if size is greater than order
@@ -39,13 +39,13 @@ bool Node::isFull()
   //determines if leaf is node
 bool Node::isLeaf()
 {
-    return leaf;    
+    return leaf;
 }
 
  // returns node size
 int Node::getSize()
 {
-    return (int)Keys.size();  
+    return (int)Keys.size();
 }
 
     //returns the key of  the entry record
@@ -102,7 +102,7 @@ Node* Node::getLeftSibling()
     return backward;
 }
 
-    
+
 
    // Print positions of records
 void Node::printInfo()

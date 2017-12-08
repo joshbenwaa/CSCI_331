@@ -23,19 +23,14 @@ void Node::insert(int key, int record)
 	}
 	else
 	{
-		// something is wrong
-	}
-	}
-	else
-	{
-		//not leaf insertion
+		
 	}
 }
 
   // This function checks if the b+tree is full and returns true or false accordingly  
 bool Node::isFull()
 {
-    if(Keys.size() + 1 >= order)    /**< If the size is greater than order */
+    if(Keys.size() + 1 >= order)    // if size is greater than order
         return true;
     else
         return false;
@@ -44,13 +39,13 @@ bool Node::isFull()
   //determines if leaf is node
 bool Node::isLeaf()
 {
-    return leaf;    /**< Return boolean value if its a leaf or not */
+    return leaf;    
 }
 
  // returns node size
 int Node::getSize()
 {
-    return (int)Keys.size();  /**< Returns size of the vector */
+    return (int)Keys.size();  
 }
 
     //returns the key of  the entry record
@@ -59,7 +54,7 @@ int Node::getEntry(int index)
     if(0 <= index && index <= order)
         return Keys[index];
     else
-        return -1;      /**< If could not find the entry */
+        return -1;      // entry can't be found
 }
 
 // deletes entry
@@ -67,8 +62,6 @@ void Node::deleteEntry(int index)
 {
 	Keys.erase(Keys.begin() +  index);
 	Records.erase(Records.begin() + index);
-	// BTree must account for the changes
-	// as well as prevent nodes of 0 size
 }
 
     // deletes key
@@ -83,8 +76,6 @@ void Node::deleteKey(int k)
 			return;
 		}
 	}
-	// BTree must account for the changes
-	// as well as prevent nodes of 0 size
 }
 
     // Returns first key of node
@@ -116,11 +107,11 @@ Node* Node::getLeftSibling()
    // Print positions of records
 void Node::printInfo()
 {
-    vector<int>::iterator nodePos;
+    vector<int>::iterator position;
 
     if(isLeaf())
-        for(nodePos = Records.begin() != nodePos; nodePos++)
-            cout << Records[nodePos] << " ";
+        for(position = Records.begin() != position; position++)
+            cout << Records[position] << " ";
     cout << endl;
 }
 

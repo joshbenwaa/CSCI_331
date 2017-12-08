@@ -79,7 +79,7 @@ namespace csci331
     	}
     }
 
-    remove()
+    remove(int key)
     {
     	int temp;
 

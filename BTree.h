@@ -9,13 +9,19 @@ namespace csci331
 {
   class BTree
   {
+  private:
+	  int order;
+	  Node* ROOT;
   public:
-    Node* ROOT; //Pointer to the root node of the B+Tree, Eldest Parent
+	  /*
+    //Node* ROOT; //Pointer to the root node of the B+Tree, Eldest Parent
     int        T_Size;
     int        int_or_string; //Integer for holding user choice for either integer or string manipulation
     string     in_file, out_file; //input and output file (string) names
    static int MAXBLOCKSIZE = 6; //Maximum number of records/keys that can be stored in a block
 
+  
+	  
  struct Node //structure for keys, copied from List.h/replace or interchange with block
 		{
 			int value_i; //Key value
@@ -51,80 +57,24 @@ namespace csci331
       in_file       = InFile; //File of input data
       out_file      = OutFile; //Output file
     }
+	*/
+    BTree();
+	  
+    BTree(int o);
+	  
+    ~BPTree();
+	  
+    void print();
 
+    void insert(int record);
+	  
+    bool modify(int key, int record);
+	  
+    int search(int key);
 
-    insert(const int record)///jake
-    {
-    	int middle;       // middle value of the node 
-    	Node* newNode;      // pointer to new Node 
-    	Node* parentNode;   // pointer to parent
-	
-	
-    	newNode = ROOT;     // newNode points to root
-    	newNode -> insert(record, record);      // insert records into root
+    bool remove(int key);
+	  
+    bool verify();
 
-    	if(newNode->isFull())  // check against node overfill
-    	{
-        	Node* leftNode = new Node();    // create new node to left
-        	middle = newNode->getSize()/2;       // find the middle of the node
-		
-        	for(int position = 0; position != middle; position++)        
-        	{
-            		leftNode->insert(newNode->getFront(), newNode->getFront()); // copy values from front of node
-            		newNode->popFront();        // Pop off of current vector
-       	 	}
-		Node* newParentNode = new Node();  // new parent node
-		parentNode = newParentNode;            // point new parent here
-        	parentNode->insert(newNode->getFront(),newNode->getFront());  //Copy to old parent node
-    	}
-    }
-
-    remove(int key)
-    {
-    	int temp;
-
-    	while(!found)
-    	{	
-        	temp = BPTree.search(key);
-        	if(temp == NULL)
-            		return false;
-        	else
-            	for(int i = 0; i < Node.Records.size(); i++)
-            	{
-                	if(Node.Records[i] == key)
-                    	Node.Records.erase(Node.Records.begin()+i);
-            	}
-    	}
-    }
-
-    Print_All()
-    {
-
-    }
-
-    Modify_Record()
-    {
-
-    }
-
-    Verify()
-    {
-
-    }
-
-    Rebuild()
-    {
-
-    }
-
-    Search()
-    {
-
-    }
-
-    Return_Size()
-    {
-
-    }
-  }
-}
+    void rebuild();
+};

@@ -5,8 +5,6 @@
 #include <iostream>
 #include <string>
 using namespace std;
-namespace csci331
-{
   class BTree
   {
   private:
@@ -78,3 +76,5 @@ namespace csci331
 
     void rebuild();
 };
+
+#endif

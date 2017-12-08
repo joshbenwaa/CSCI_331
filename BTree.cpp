@@ -1,24 +1,30 @@
+/*BTree.cpp holds the implementation of B+tree methods */
 #include "BTree.h"
+#include "Node.h"
+using namespace std;
 
-BPTree::BPTree()
+namespace csci331_project2
+
+BPTree()
 {
     ROOT = new Node();
 }
-
+/*
 BPTree::BPTree(int o)
 {
     ROOT = new Node();
 }
-
+*/
 BPTree::BPTree(vector<int> n, int o)
 {
     ROOT = new Node();
 }
 
-BPTree::~BPTree()
+/*BPTree::~BPTree()
 {
 
 }
+*/
 
 void BPTree::insert(int record)
 {
@@ -33,8 +39,8 @@ void BPTree::insert(int record)
     {
         Node* leftNode = new Node();    // point to new left node
         middle = newNode->getSize()/2;       // calculate middle value of node
-		    
-        for(int position = 0; position != middle; position++)        
+
+        for(int position = 0; position != middle; position++)
         {
             leftNode->insert(newNode->getFront(), newNode->getFront()); //copy values
             newNode->popFront();        // pop off of vector
@@ -75,7 +81,7 @@ int BPTree::search(int key)
     }
     root = root->getNext();
     return search(key);
-    
+
     return -1; //failed
 }
 
